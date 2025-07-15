@@ -41,8 +41,9 @@ void resize_arr(arr* d_array){
     int size_arr = d_array -> size_d_arr;
     int elmnt_in_arr = d_array -> elements_in_arr;
     if(size_arr == elmnt_in_arr){
-        d_array -> size_d_arr *= 2;
-        int *new_data = realloc(d_array -> data, size_arr * 2 * sizeof(int) + 1);
+        (size_arr) ? size_arr*=2 : size_arr ++;
+        d_array -> size_d_arr = size_arr;
+        int *new_data = realloc(d_array -> data, size_arr);
         if (new_data == NULL){
             printf("Resizing failed");
             exit(1);
