@@ -12,3 +12,4 @@ typedef struct d_arr {
 arr* create_array();
 void free_array(arr* d_array);
 void print_arr(arr* d_array);
+void append (int element, arr* d_array);

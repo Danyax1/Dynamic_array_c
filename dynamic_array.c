@@ -36,3 +36,28 @@ void print_arr(arr* d_array){
     }
     printf("]\n");
 }
+
+void resize_arr(arr* d_array){
+    int size_arr = d_array -> size_d_arr;
+    int elmnt_in_arr = d_array -> elements_in_arr;
+    if(size_arr == elmnt_in_arr){
+        d_array -> size_d_arr *= 2;
+        int *new_data = realloc(d_array -> data, size_arr * 2 * sizeof(int) + 1);
+        if (new_data == NULL){
+            printf("Resizing failed");
+            exit(1);
+        }
+        
+        d_array->data = new_data;
+    }
+}
+
+void append (int element, arr* d_array){
+    int size_arr = d_array -> size_d_arr;
+    int elmnt_in_arr = d_array -> elements_in_arr;
+    if(size_arr == elmnt_in_arr){
+        resize_arr(d_array);
+    }
+    d_array->data[elmnt_in_arr] = element;
+    (d_array -> elements_in_arr)++;
+}
