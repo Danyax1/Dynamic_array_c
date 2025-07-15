@@ -6,15 +6,22 @@ typedef struct d_arr {
     size_t elements_in_arr;
 } arr;
 
-arr* create_array() {
+arr* create_array(size_t initial_size) {
     arr* d_array = malloc(sizeof(arr));
     if (d_array == NULL) {
         printf("Initialization failed\n");
         return NULL;
     }
-    d_array->data = NULL;
-    d_array->size_d_arr = 0;
+    d_array->data = malloc(initial_size * sizeof(int));
+    if (d_array->data == NULL) {
+        printf("Data allocation failed\n");
+        free(d_array);
+        return NULL;
+    }
+
+    d_array->size_d_arr = initial_size;
     d_array->elements_in_arr = 0;
+
     return d_array;
 }
 
