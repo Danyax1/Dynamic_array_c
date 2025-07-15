@@ -66,3 +66,14 @@ void append_arr(int element, arr* d_array){
     d_array->data[elmnt_in_arr] = element;
     (d_array -> elements_in_arr)++;
 }
+
+int pop_arr(arr* d_array){
+    int last_el_index = --(d_array->elements_in_arr);
+    if (last_el_index < 0){
+        printf("Array is empty. Pop failed");
+        exit(1);
+    }
+    int last_element = d_array->data[last_el_index];
+    d_array->elements_in_arr = last_el_index;
+    return last_element;
+}

@@ -29,6 +29,19 @@ int main(){
     print_arr(arr_1);
     print_arr(arr_2);
 
+    int last_of_arr_1 = pop_arr(arr_1);
+    printf("Last element of array 1: %d\n", last_of_arr_1);
+    print_arr(arr_1);
+
+    last_of_arr_1 = pop_arr(arr_1);
+    printf("Last element of array 1: %d\n", last_of_arr_1);
+    print_arr(arr_1);
+
+    last_of_arr_1 = pop_arr(arr_1);
+    printf("Last element of array 1: %d\n", last_of_arr_1);
+    print_arr(arr_1);
+
+
     free_arr(arr_1);
     free_arr(arr_2);
     return 0;

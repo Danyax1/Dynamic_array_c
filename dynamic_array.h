@@ -9,3 +9,4 @@ arr* create_arr();
 void free_arr(arr* d_array);
 void print_arr(arr* d_array);
 void append_arr (int element, arr* d_array);
+int pop_arr(arr* d_array);
