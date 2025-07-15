@@ -2,9 +2,9 @@
 
 
 int main(){
+    
+    arr *arr_1 = create_array();
 
-    dynamic_arr *arr_1 = create_array();
-
-    free(arr_1);
+    free_array(arr_1);
     return 0;
 }

@@ -1,22 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "dynamic_array.h"
 
-const int START_SIZE = 0;
-typedef struct d_arr{
+typedef struct d_arr {
     int *data;
     size_t size_d_arr;
-    size_t start_size;
-} dynamic_arr;
+    size_t elements_in_arr;
+} arr;
 
-dynamic_arr* create_array() {
-    dynamic_arr* arr = malloc(sizeof(dynamic_arr));
-    if (arr = NULL){
-        printf("Initialization failed");
+arr* create_array() {
+    arr* d_array = malloc(sizeof(arr));
+    if (d_array == NULL) {
+        printf("Initialization failed\n");
         return NULL;
     }
-    arr -> data = NULL;
-    arr->size_d_arr = 0;
-    arr->start_size = START_SIZE;
-    return arr;
+    d_array->data = NULL;
+    d_array->size_d_arr = 0;
+    d_array->elements_in_arr = 0;
+    return d_array;
+}
+
+void free_array(arr* d_array) {
+    if (d_array != NULL) {
+        free(d_array->data); 
+        free(d_array);
+    }
 }
