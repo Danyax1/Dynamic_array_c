@@ -1,8 +1,12 @@
 #include "dynamic_array.h"
 
+typedef struct d_arr {
+    int *data;
+    int size_d_arr;
+    int elements_in_arr;
+} arr;
 
-
-arr* create_array(int initial_size) {
+arr* create_arr(int initial_size) {
     arr* d_array = malloc(sizeof(arr));
     if (d_array == NULL) {
         printf("Initialization failed\n");
@@ -22,7 +26,7 @@ arr* create_array(int initial_size) {
     return d_array;
 }
 
-void free_array(arr* d_array) {
+void free_arr(arr* d_array) {
     if (d_array != NULL) {
         free(d_array->data); 
         free(d_array);
@@ -43,7 +47,7 @@ void resize_arr(arr* d_array){
     if(size_arr == elmnt_in_arr){
         (size_arr) ? size_arr*=2 : size_arr ++;
         d_array -> size_d_arr = size_arr;
-        int *new_data = realloc(d_array -> data, size_arr);
+        int *new_data = realloc(d_array -> data, size_arr * sizeof(int));
         if (new_data == NULL){
             printf("Resizing failed");
             exit(1);
@@ -53,7 +57,7 @@ void resize_arr(arr* d_array){
     }
 }
 
-void append (int element, arr* d_array){
+void append_arr(int element, arr* d_array){
     int size_arr = d_array -> size_d_arr;
     int elmnt_in_arr = d_array -> elements_in_arr;
     if(size_arr == elmnt_in_arr){
