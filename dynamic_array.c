@@ -57,7 +57,7 @@ void resize_arr(arr* d_array){
     }
 }
 
-void append_arr(int element, arr* d_array){
+void append_arr(arr* d_array, int element){
     int size_arr = d_array -> size_d_arr;
     int elmnt_in_arr = d_array -> elements_in_arr;
     if(size_arr == elmnt_in_arr){

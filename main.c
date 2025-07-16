@@ -14,17 +14,17 @@ int main(){
     arr *arr_2 = create_arr(arr_2_size);
 
     
-    append_arr(10, arr_1);
-    append_arr(20, arr_1);
-    append_arr(30, arr_1);
+    append_arr(arr_1, 10);
+    append_arr(arr_1, 20);
+    append_arr(arr_1, 30);
 
 
-    append_arr(2, arr_2);
-    append_arr(4, arr_2);
-    append_arr(6, arr_2);
-    append_arr(8, arr_2);
-    append_arr(10, arr_2);
-    append_arr(12, arr_2);
+    append_arr(arr_2, 2);
+    append_arr(arr_2, 4);
+    append_arr(arr_2, 6);
+    append_arr(arr_2, 8);
+    append_arr(arr_2, 0);
+    append_arr(arr_2, 2);
 
     int a = get_arr(arr_1, 2);          // 30
     printf("%d\n", a);
