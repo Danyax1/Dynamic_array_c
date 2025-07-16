@@ -48,7 +48,23 @@ int main(){
     print_arr(arr_1);
 
 
+    int arr_3_size = 20;
+    printf("Array_3 size: %d\n", arr_3_size);
+    arr *arr_3 = create_arr(arr_3_size);
+
+    for (int i = 0; i < 20; i++){
+        append_arr((100 % (i+1) - i / 3), arr_3);
+    }
+    print_arr(arr_3);
+    sort_arr(arr_3);
+    printf("Sorted array:     ");
+    print_arr(arr_3);
+
+
+
+
     free_arr(arr_1);
     free_arr(arr_2);
+    free_arr(arr_3);
     return 0;
 }

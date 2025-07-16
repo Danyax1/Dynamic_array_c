@@ -11,3 +11,4 @@ void print_arr(arr* d_array);
 void append_arr (int element, arr* d_array);
 int pop_arr(arr* d_array);
 int get_arr(arr* d_array, int index);
+void sort_arr(arr* d_array);

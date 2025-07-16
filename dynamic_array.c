@@ -86,3 +86,10 @@ int get_arr(arr* d_array, int index){
     int element = d_array->data[index];
     return element;
 }
+
+int comp(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+void sort_arr(arr* d_array){
+    qsort(d_array->data, d_array->elements_in_arr, sizeof(int), comp);
+}
