@@ -77,3 +77,12 @@ int pop_arr(arr* d_array){
     d_array->elements_in_arr = last_el_index;
     return last_element;
 }
+
+int get_arr(arr* d_array, int index){
+    if (index < 0 || index >= d_array->elements_in_arr){
+        printf("Accessing elements out of range.");
+        exit(1);
+    }
+    int element = d_array->data[index];
+    return element;
+}

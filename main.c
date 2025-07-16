@@ -26,6 +26,12 @@ int main(){
     append_arr(10, arr_2);
     append_arr(12, arr_2);
 
+    int a = get_arr(arr_1, 2);          // 30
+    printf("%d\n", a);
+
+    int b = get_arr(arr_2, 4);          // 10
+    printf("%d\n", b);
+
     print_arr(arr_1);
     print_arr(arr_2);
 
