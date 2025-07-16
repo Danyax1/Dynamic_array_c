@@ -23,7 +23,7 @@ int main(){
     append_arr(4, arr_2);
     append_arr(6, arr_2);
     append_arr(8, arr_2);
-    append_arr(10, arr_2);
+    append_arr(14, arr_2);
     append_arr(12, arr_2);
 
     int a = get_arr(arr_1, 2);          // 30
@@ -57,8 +57,12 @@ int main(){
     }
     print_arr(arr_3);
     sort_arr(arr_3);
-    printf("Sorted array:     ");
+    printf("Sorted array 3:     ");
     print_arr(arr_3);
+
+    sort_arr(arr_2);
+    printf("Sorted array 2:     ");
+    print_arr(arr_2);
 
 
 
