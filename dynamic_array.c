@@ -86,3 +86,30 @@ int get_arr(arr* d_array, int index){
     int element = d_array->data[index];
     return element;
 }
+
+int comp(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+void sort_arr(arr* d_array){
+    // if array is bigger that 10 elements -- quicksort
+    //                           otherwise -- insertion sort
+    if(d_array->elements_in_arr > 10){
+        qsort(d_array->data, d_array->elements_in_arr, sizeof(int), comp);
+    } else if(d_array->elements_in_arr){
+        //insertion sort
+        int *arr = d_array -> data;
+        int N = d_array -> elements_in_arr;
+
+        for (int i = 1; i < N; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }else{
+        return;
+    }
+}

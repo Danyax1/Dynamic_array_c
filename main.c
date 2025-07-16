@@ -19,12 +19,21 @@ int main(){
     append_arr(arr_1, 30);
 
 
+<<<<<<< HEAD
     append_arr(arr_2, 2);
     append_arr(arr_2, 4);
     append_arr(arr_2, 6);
     append_arr(arr_2, 8);
     append_arr(arr_2, 0);
     append_arr(arr_2, 2);
+=======
+    append_arr(2, arr_2);
+    append_arr(4, arr_2);
+    append_arr(6, arr_2);
+    append_arr(8, arr_2);
+    append_arr(14, arr_2);
+    append_arr(12, arr_2);
+>>>>>>> sorting_arr
 
     int a = get_arr(arr_1, 2);          // 30
     printf("%d\n", a);
@@ -48,7 +57,27 @@ int main(){
     print_arr(arr_1);
 
 
+    int arr_3_size = 20;
+    printf("Array_3 size: %d\n", arr_3_size);
+    arr *arr_3 = create_arr(arr_3_size);
+
+    for (int i = 0; i < 20; i++){
+        append_arr((100 % (i+1) - i / 3), arr_3);
+    }
+    print_arr(arr_3);
+    sort_arr(arr_3);
+    printf("Sorted array 3:     ");
+    print_arr(arr_3);
+
+    sort_arr(arr_2);
+    printf("Sorted array 2:     ");
+    print_arr(arr_2);
+
+
+
+
     free_arr(arr_1);
     free_arr(arr_2);
+    free_arr(arr_3);
     return 0;
 }
