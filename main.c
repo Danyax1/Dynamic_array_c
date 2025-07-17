@@ -68,6 +68,19 @@ int main(){
     printf("Sorted array 2:     ");
     print_arr(arr_2);
 
+    insert_arr(arr_1, 0, 1);
+    insert_arr(arr_1, 0, 2);
+    insert_arr(arr_1, 0, 3);
+    insert_arr(arr_1, 1, 1000);
+    insert_arr(arr_1, 1, 1000);
+    insert_arr(arr_1, 1, 1000);
+    insert_arr(arr_1, 4, 4000);
+    insert_arr(arr_1, 3, 3000);
+    insert_arr(arr_1, 2, 2000);
+    pop_arr(arr_1);
+    pop_arr(arr_1);
+
+    print_arr(arr_1);
 
 
 

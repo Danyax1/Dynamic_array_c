@@ -45,7 +45,7 @@ void resize_arr(arr* d_array){
     int size_arr = d_array -> size_d_arr;
     int elmnt_in_arr = d_array -> elements_in_arr;
     if(size_arr == elmnt_in_arr){
-        (size_arr) ? size_arr*=2 : size_arr ++;
+        (size_arr) ? size_arr *= 2 : size_arr ++;
         d_array -> size_d_arr = size_arr;
         int *new_data = realloc(d_array -> data, size_arr * sizeof(int));
         if (new_data == NULL){
@@ -115,4 +115,39 @@ void sort_arr(arr* d_array){
 }
 int len_arr(arr *d_array){
     return d_array->elements_in_arr;
+}
+
+void insert_arr(arr *d_array, int index, int element){
+    if(index < 0 || index > d_array->elements_in_arr){
+        printf("Inserting out of range");
+        exit(1);
+    }
+
+    /*
+    1) append element in the array (account resizing if needed)
+    2) copy the array part past insert index to temp without last element
+    3) put the element in array
+    4) put temp in array
+
+    Inserting f at the index 2
+    {a, b, c, d, e}                       -> 
+    {a, b, c, d, e, f}                    -> 
+    {a, b, _, _, _, _} (temp = {c, d, e}) ->
+    {a, b, f, _, _, _} (temp = {c, d, e}) ->
+    {a, b, f, c, d, e}
+    */
+    
+    append_arr(d_array, element);
+    
+    int nums_copy_temp = d_array->elements_in_arr - index - 1;
+
+    int temp[nums_copy_temp];
+    memcpy(temp, &(d_array->data[index]), nums_copy_temp * sizeof(int));
+
+
+    d_array->data[index] = element;
+
+    memcpy(&(d_array->data[index + 1]), temp, nums_copy_temp * sizeof(int));
+
+
 }
