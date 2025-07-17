@@ -34,7 +34,7 @@ void free_arr(arr* d_array) {
 }
 
 void print_arr(arr* d_array){
-    printf("Array: [");
+    printf("[");
     for(int i = 0; i < d_array->elements_in_arr; i++){
         printf(" %d ", d_array->data[i]);
     }
@@ -112,4 +112,7 @@ void sort_arr(arr* d_array){
     }else{
         return;
     }
+}
+int len_arr(arr *d_array){
+    return d_array->elements_in_arr;
 }
