@@ -1,9 +1,9 @@
 #include "dynamic_array.h"
 
-typedef struct d_arr {
+typedef struct dynamic_array {
     int *data;
-    int size_d_arr;
-    int elements_in_arr;
+    int size;
+    int count;
 } arr;
 
 arr* create_arr(int initial_size) {
@@ -20,14 +20,18 @@ arr* create_arr(int initial_size) {
         return NULL;
     }
 
-    d_array->size_d_arr = initial_size;
-    d_array->elements_in_arr = 0;
+    d_array->size = initial_size;
+    d_array->count = 0;
 
     return d_array;
 }
 
 void free_arr(arr* d_array) {
     if (d_array != NULL) {
+        if (d_array == NULL){
+            printf("Freeing failed");
+            exit(1);
+        }
         free(d_array->data); 
         free(d_array);
     }
@@ -35,18 +39,18 @@ void free_arr(arr* d_array) {
 
 void print_arr(arr* d_array){
     printf("[");
-    for(int i = 0; i < d_array->elements_in_arr; i++){
+    for(int i = 0; i < d_array->count; i++){
         printf(" %d ", d_array->data[i]);
     }
     printf("]\n");
 }
 
 void resize_arr(arr* d_array){
-    int size_arr = d_array -> size_d_arr;
-    int elmnt_in_arr = d_array -> elements_in_arr;
+    int size_arr = d_array -> size;
+    int elmnt_in_arr = d_array -> count;
     if(size_arr == elmnt_in_arr){
         (size_arr) ? size_arr *= 2 : size_arr ++;
-        d_array -> size_d_arr = size_arr;
+        d_array -> size = size_arr;
         int *new_data = realloc(d_array -> data, size_arr * sizeof(int));
         if (new_data == NULL){
             printf("Resizing failed");
@@ -58,28 +62,29 @@ void resize_arr(arr* d_array){
 }
 
 void append_arr(arr* d_array, int element){
-    int size_arr = d_array -> size_d_arr;
-    int elmnt_in_arr = d_array -> elements_in_arr;
+    int size_arr = d_array -> size;
+    int elmnt_in_arr = d_array -> count;
     if(size_arr == elmnt_in_arr){
         resize_arr(d_array);
     }
     d_array->data[elmnt_in_arr] = element;
-    (d_array -> elements_in_arr)++;
+    (d_array -> count)++;
 }
 
 int pop_arr(arr* d_array){
-    int last_el_index = --(d_array->elements_in_arr);
+    int last_el_index = --(d_array->count);
     if (last_el_index < 0){
         printf("Array is empty. Pop failed");
         exit(1);
     }
+    
     int last_element = d_array->data[last_el_index];
-    d_array->elements_in_arr = last_el_index;
+    d_array->count = last_el_index;
     return last_element;
 }
 
 int get_arr(arr* d_array, int index){
-    if (index < 0 || index >= d_array->elements_in_arr){
+    if (index < 0 || index >= d_array->count){
         printf("Accessing elements out of range.");
         exit(1);
     }
@@ -93,12 +98,12 @@ int comp(const void *a, const void *b) {
 void sort_arr(arr* d_array){
     // if array is bigger that 10 elements -- quicksort
     //                           otherwise -- insertion sort
-    if(d_array->elements_in_arr > 10){
-        qsort(d_array->data, d_array->elements_in_arr, sizeof(int), comp);
-    } else if(d_array->elements_in_arr){
+    if(d_array->count > 10){
+        qsort(d_array->data, d_array->count, sizeof(int), comp);
+    } else if(d_array->count){
         //insertion sort
         int *arr = d_array -> data;
-        int N = d_array -> elements_in_arr;
+        int N = d_array -> count;
 
         for (int i = 1; i < N; i++) {
             int key = arr[i];
@@ -114,11 +119,11 @@ void sort_arr(arr* d_array){
     }
 }
 int len_arr(arr *d_array){
-    return d_array->elements_in_arr;
+    return d_array->count;
 }
 
 void insert_arr(arr *d_array, int index, int element){
-    if(index < 0 || index > d_array->elements_in_arr){
+    if(index < 0 || index > d_array->count){
         printf("Inserting out of range");
         exit(1);
     }
@@ -139,9 +144,13 @@ void insert_arr(arr *d_array, int index, int element){
     
     append_arr(d_array, element);
     
-    int nums_copy_temp = d_array->elements_in_arr - index - 1;
+    int nums_copy_temp = d_array->count - index - 1;
 
-    int temp[nums_copy_temp];
+    int *temp = malloc(nums_copy_temp * sizeof(int));
+    if (!temp) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
     memcpy(temp, &(d_array->data[index]), nums_copy_temp * sizeof(int));
 
 
@@ -149,5 +158,6 @@ void insert_arr(arr *d_array, int index, int element){
 
     memcpy(&(d_array->data[index + 1]), temp, nums_copy_temp * sizeof(int));
 
+    free(temp);
 
 }

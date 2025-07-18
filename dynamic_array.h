@@ -4,9 +4,9 @@
 #include <string.h>
 #include "dynamic_array.h"
 
-typedef struct d_arr arr;
+typedef struct dynamic_array arr;
 
-arr* create_arr();
+arr* create_arr(int size);
 void free_arr(arr* d_array);
 void print_arr(arr* d_array);
 void append_arr(arr* d_array, int element);
