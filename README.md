@@ -23,14 +23,19 @@ This dynamic array supports:
 Copy `dynamic_array.c` and `dynamic_array.h` into your project directory.
 
 ### 2. Include the header
-> #include "dynamic_array.h"
+```
+ #include "dynamic_array.h"
+```
 ### 3. Create an array
-> arr *my_array = create_arr(INITIAL_CAPACITY);
+```
+arr *my_array = create_arr(INITIAL_CAPACITY);
+```
 ### 4. Use the array
 Call the available functions to manipulate or access the array as needed.
 
 ### 5. Free the memory
-
-> free_arr(my_array);
+```
+ free_arr(my_array);
+```
 Don’t forget to free the array when you’re done to avoid memory leaks
 
