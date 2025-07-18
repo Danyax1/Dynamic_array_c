@@ -28,13 +28,9 @@ arr* create_arr(int initial_size) {
 
 void free_arr(arr* d_array) {
     if (d_array != NULL) {
-        if (d_array == NULL){
-            printf("Freeing failed");
-            exit(1);
-        }
-        free(d_array->data); 
+        free(d_array->data);
         free(d_array);
-    }
+    }  
 }
 
 void print_arr(arr* d_array){
@@ -56,8 +52,17 @@ void resize_arr(arr* d_array){
             printf("Resizing failed");
             exit(1);
         }
-        
         d_array->data = new_data;
+
+    } else{
+        int new_size = d_array->size / 2;
+        int *new_data = realloc(d_array->data, new_size * sizeof(int));
+        if (new_data == NULL) {
+            printf("Resizing failed\n");
+            exit(1);
+        }
+        d_array->data = new_data;
+        d_array->size = new_size;
     }
 }
 
@@ -72,14 +77,18 @@ void append_arr(arr* d_array, int element){
 }
 
 int pop_arr(arr* d_array){
-    int last_el_index = --(d_array->count);
-    if (last_el_index < 0){
-        printf("Array is empty. Pop failed");
+    if (d_array->count == 0){
+        printf("Array is empty. Pop failed\n");
         exit(1);
     }
-    
+    int last_el_index = d_array->count - 1;
     int last_element = d_array->data[last_el_index];
-    d_array->count = last_el_index;
+    d_array->count--;
+
+    if (d_array->count > 0 && d_array->count < d_array->size / 4 && d_array->size > 1) {
+        resize_arr(d_array);
+    }
+
     return last_element;
 }
 
