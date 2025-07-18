@@ -1,91 +1,118 @@
+#include <stdio.h>
 #include "dynamic_array.h"
 
+void test_basic_operations();
+void test_sorting();
+void test_insertion();
+void test_pop();
+void test_custom_array_fill();
 
-int main(){
-    int arr_1_size;
-    printf("Enter array_1 size: ");
-    scanf("%d", &arr_1_size);
+int main() {
+    printf("=== Dynamic Array Test Suite ===\n");
 
-    int arr_2_size;
-    printf("Enter array_2 size: ");
-    scanf("%d", &arr_2_size);
-    
-    arr *arr_1 = create_arr(arr_1_size);
-    arr *arr_2 = create_arr(arr_2_size);
+    test_basic_operations();
+    test_pop();
+    test_insertion();
+    test_sorting();
+    test_custom_array_fill();
 
-    
+    printf("=== All tests completed ===\n");
+    return 0;
+}
+
+void test_basic_operations() {
+    printf("\n-- Testing Basic Operations --\n");
+
+    arr *arr_1 = create_arr(3);
     append_arr(arr_1, 10);
     append_arr(arr_1, 20);
     append_arr(arr_1, 30);
 
-
-    append_arr(arr_2, 2);
-    append_arr(arr_2, 4);
-    append_arr(arr_2, 6);
-    append_arr(arr_2, 8);
-    append_arr(arr_2, 0);
-    append_arr(arr_2, 2);
-
-    int a = get_arr(arr_1, 2);          // 30
-    printf("%d\n", a);
-
-    int b = get_arr(arr_2, 4);          // 10
-    printf("%d\n", b);
-
-    int len_arr_1 = len_arr(arr_1);
-    printf("Len arr_1 %d\n", len_arr_1);
-    print_arr(arr_1);
-    print_arr(arr_2);
-
-    int last_of_arr_1 = pop_arr(arr_1);
-    printf("Last element of array 1: %d\n", last_of_arr_1);
+    printf("arr_1 contents: ");
     print_arr(arr_1);
 
-    last_of_arr_1 = pop_arr(arr_1);
-    printf("Last element of array 1: %d\n", last_of_arr_1);
-    print_arr(arr_1);
+    int val = get_arr(arr_1, 2);
+    printf("Value at index 2: %d\n", val); // 30
 
-    last_of_arr_1 = pop_arr(arr_1);
-    printf("Last element of array 1: %d\n", last_of_arr_1);
-    print_arr(arr_1);
-
-    len_arr_1 = len_arr(arr_1);
-    printf("Len arr_1 %d\n", len_arr_1);
-
-    int arr_3_size = 20;
-    printf("Array_3 size: %d\n", arr_3_size);
-    arr *arr_3 = create_arr(arr_3_size);
-
-    for (int i = 0; i < arr_3_size; i++){
-        append_arr(arr_3, (100 % (i+1) - i / 3));
-    }
-    print_arr(arr_3);
-    sort_arr(arr_3);
-    printf("Sorted array 3:     ");
-    print_arr(arr_3);
-
-    sort_arr(arr_2);
-    printf("Sorted array 2:     ");
-    print_arr(arr_2);
-
-    insert_arr(arr_1, 0, 1);
-    insert_arr(arr_1, 0, 2);
-    insert_arr(arr_1, 0, 3);
-    insert_arr(arr_1, 1, 1000);
-    insert_arr(arr_1, 1, 1000);
-    insert_arr(arr_1, 1, 1000);
-    insert_arr(arr_1, 4, 4000);
-    insert_arr(arr_1, 3, 3000);
-    insert_arr(arr_1, 2, 2000);
-    pop_arr(arr_1);
-    pop_arr(arr_1);
-
-    print_arr(arr_1);
-
-
+    printf("Length of arr_1: %d\n", len_arr(arr_1));
 
     free_arr(arr_1);
-    free_arr(arr_2);
-    free_arr(arr_3);
-    return 0;
+}
+
+void test_pop() {
+    printf("\n-- Testing Pop Operation --\n");
+
+    arr *arr = create_arr(5);
+    append_arr(arr, 5);
+    append_arr(arr, 15);
+    append_arr(arr, 25);
+
+    printf("Original array: ");
+    print_arr(arr);
+
+    while (len_arr(arr) > 0) {
+        int popped = pop_arr(arr);
+        printf("Popped: %d | New array: ", popped);
+        print_arr(arr);
+    }
+
+    free_arr(arr);
+}
+
+void test_insertion() {
+    printf("\n-- Testing Insertion --\n");
+
+    arr *arr = create_arr(5);
+
+    insert_arr(arr, 0, 1);
+    insert_arr(arr, 1, 2);
+    insert_arr(arr, 1, 3);
+    insert_arr(arr, 2, 4);
+    insert_arr(arr, 0, 100);
+    insert_arr(arr, 3, 200);
+
+    printf("Array after insertions: ");
+    print_arr(arr);
+
+    free_arr(arr);
+}
+
+void test_sorting() {
+    printf("\n-- Testing Sorting --\n");
+
+    arr *arr = create_arr(10);
+    int data[] = {5, 3, 9, 1, 6, 8, 2, 7, 4, 0};
+    for (int i = 0; i < 10; i++) {
+        append_arr(arr, data[i]);
+    }
+
+    printf("Before sorting: ");
+    print_arr(arr);
+
+    sort_arr(arr);
+
+    printf("After sorting:  ");
+    print_arr(arr);
+
+    free_arr(arr);
+}
+
+void test_custom_array_fill() {
+    printf("\n-- Testing Custom Array Fill & Sort --\n");
+
+    int arr_size = 20;
+    arr *arr = create_arr(arr_size);
+
+    for (int i = 0; i < arr_size; i++) {
+        append_arr(arr, (100 % (i + 1)) - (i / 3));
+    }
+
+    printf("Filled array:     ");
+    print_arr(arr);
+
+    sort_arr(arr);
+    printf("Sorted array:     ");
+    print_arr(arr);
+
+    free_arr(arr);
 }
